@@ -1,5 +1,5 @@
 import { ZodError, ZodIssue } from 'zod';
-import { IGenereicErrorMessage } from '../../cow/interfaces/errorMessage';
+import { IGenereicErrorMessage } from '../interfaces/errorMessage';
 import ApiError from './ApiError';
 
 export const handleZodError = (error: ZodError) => {

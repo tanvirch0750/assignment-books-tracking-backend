@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { IGenereicErrorMessage } from '../../cow/interfaces/errorMessage';
+import { IGenereicErrorMessage } from '../interfaces/errorMessage';
 import ApiError from './ApiError';
 
 export const handleValidationErrorDB = (

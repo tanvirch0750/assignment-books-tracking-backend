@@ -1,4 +1,4 @@
-import { IGenereicErrorMessage } from '../../cow/interfaces/errorMessage';
+import { IGenereicErrorMessage } from '../interfaces/errorMessage';
 
 class ApiError extends Error {
   statusCode: number;
