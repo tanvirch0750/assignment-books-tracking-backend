@@ -58,8 +58,7 @@ const getAllBookFromDB = async (
 const getSingleBookFromDB = async (
   id: string
 ): Promise<IBook | null | undefined> => {
-  const result = await Book.findById(id);
-  console.log('rere', result);
+  const result = (await Book.findById(id))?.populate('addedBy');
   return result;
 };
 
