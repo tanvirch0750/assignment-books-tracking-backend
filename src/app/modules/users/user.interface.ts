@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { Model } from 'mongoose';
+import { ENUM_USER_ROLE } from '../../../enums/users';
 
 export type IUser = {
   userName: string;
   email: string;
   password: string;
   role: string;
+  id?: string;
 };
 
 // instance methods
@@ -26,3 +28,17 @@ export interface UserModel
     savedPassword: string
   ): Promise<boolean>;
 }
+
+export type ILoginUser = {
+  email: string;
+  password: string;
+};
+
+export type ILoginUserResponse = {
+  accessToken: string;
+};
+
+export type IVerifiedLoginUser = {
+  userId: string;
+  role: ENUM_USER_ROLE;
+};
