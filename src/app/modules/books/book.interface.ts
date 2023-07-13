@@ -13,6 +13,7 @@ export type IBook = {
   status: IStatus;
   image: string;
   addedBy: Types.ObjectId | IUser;
+  id?: string;
 };
 
 export type BookModel = Model<IBook, Record<string, unknown>>;

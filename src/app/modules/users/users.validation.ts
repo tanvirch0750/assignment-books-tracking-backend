@@ -9,7 +9,7 @@ export const createUserZodSchema = z.object({
       .string()
       .email({ message: 'Invalid email format' })
       .min(1, { message: 'Email is required' }),
-    username: z.string({
+    userName: z.string({
       required_error: 'Username is required',
     }),
   }),
