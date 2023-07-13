@@ -8,9 +8,6 @@ export type IBook = {
   author: string;
   genre: string;
   publicationYear: string;
-  reviews: string[];
-  wishlist: boolean;
-  status: IStatus;
   image: string;
   addedBy: Types.ObjectId | IUser;
   id?: string;

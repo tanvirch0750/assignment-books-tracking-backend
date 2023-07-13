@@ -35,6 +35,7 @@ export type ILoginUser = {
 };
 
 export type ILoginUserResponse = {
+  userId?: string;
   accessToken: string;
 };
 

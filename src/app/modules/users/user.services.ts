@@ -42,6 +42,7 @@ const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
     );
 
     return {
+      userId,
       accessToken,
     };
   }

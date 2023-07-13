@@ -1,5 +1,4 @@
 import { Schema, model } from 'mongoose';
-import { status } from './book.constant';
 import { BookModel, IBook } from './book.interface';
 
 const bookSchema = new Schema<IBook, BookModel>(
@@ -20,19 +19,19 @@ const bookSchema = new Schema<IBook, BookModel>(
       type: String,
       required: true,
     },
-    reviews: {
-      type: [String],
-      default: [],
-    },
-    wishlist: {
-      type: Boolean,
-      default: false,
-    },
-    status: {
-      type: String,
-      enum: status,
-      required: true,
-    },
+    // reviews: {
+    //   type: [String],
+    //   default: [],
+    // },
+    // wishlist: {
+    //   type: Boolean,
+    //   default: false,
+    // },
+    // status: {
+    //   type: String,
+    //   enum: status,
+    //   required: true,
+    // },
     image: {
       type: String,
       required: true,
