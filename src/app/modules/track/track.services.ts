@@ -3,9 +3,7 @@ import ApiError from '../../../errors/ApiError';
 import { calculatePagination } from '../../../helpers/paginationHelper';
 import { IGenericPaginationResponse } from '../../../interfaces/genericPaginationResponse';
 import { IpaginationOptions } from '../../../interfaces/paginationOptions';
-import { findFilterConditions } from '../../../shared/findFilterConditions';
-import { trackSearchableFields } from './track.constant';
-import { ITrack, ITrackFilters } from './track.interface';
+import { ITrack } from './track.interface';
 import { Track } from './track.model';
 
 const createTrackToDB = async (
@@ -44,22 +42,11 @@ const deleteTrackFromDB = async (
 };
 
 const getAllTrackFromDB = async (
-  filters: ITrackFilters,
+  id: string,
   paginationOptions: IpaginationOptions
 ): Promise<IGenericPaginationResponse<ITrack[]>> => {
-  const { searchTerm, ...filtersData } = filters;
-
-  const andConditions = findFilterConditions(
-    searchTerm,
-    filtersData,
-    trackSearchableFields
-  );
-
   const { page, limit, skip, sortBy, sortOrder } =
     calculatePagination(paginationOptions);
-
-  const whereConditions =
-    andConditions.length > 0 ? { $and: andConditions } : {};
 
   const sortConditions: { [key: string]: SortOrder } = {};
 
@@ -67,14 +54,14 @@ const getAllTrackFromDB = async (
     sortConditions[sortBy] = sortOrder;
   }
 
-  const result = await Track.find(whereConditions)
+  const result = await Track.find({ user: id })
     .populate('book')
     .populate('user')
     .sort(sortConditions)
     .skip(skip)
     .limit(limit);
 
-  const total = await Track.countDocuments(whereConditions);
+  const total = result.length;
 
   return {
     meta: {

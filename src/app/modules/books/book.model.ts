@@ -19,19 +19,7 @@ const bookSchema = new Schema<IBook, BookModel>(
       type: String,
       required: true,
     },
-    // reviews: {
-    //   type: [String],
-    //   default: [],
-    // },
-    // wishlist: {
-    //   type: Boolean,
-    //   default: false,
-    // },
-    // status: {
-    //   type: String,
-    //   enum: status,
-    //   required: true,
-    // },
+
     image: {
       type: String,
       required: true,

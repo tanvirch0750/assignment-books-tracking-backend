@@ -5,7 +5,6 @@ import ApiError from '../../../errors/ApiError';
 import catchAsync from '../../../shared/catchAsync';
 import pick from '../../../shared/pick';
 import sendResponse from '../../../shared/sendResponse';
-import { tracklistFilterableFields } from './track.constant';
 import { ITrack } from './track.interface';
 import { TrackServices } from './track.services';
 
@@ -24,13 +23,10 @@ const createTrack: RequestHandler = catchAsync(async (req, res) => {
 });
 
 const getAllTrack: RequestHandler = catchAsync(async (req, res, next) => {
-  const filters = pick(req.query, tracklistFilterableFields);
+  const id = req.user?.userId;
   const paginationOptions = pick(req.query, paginationFields);
 
-  const result = await TrackServices.getAllTrackFromDB(
-    filters,
-    paginationOptions
-  );
+  const result = await TrackServices.getAllTrackFromDB(id, paginationOptions);
 
   if (result.data.length === 0) {
     return next(new ApiError('No tracked books found!', httpStatus.NOT_FOUND));

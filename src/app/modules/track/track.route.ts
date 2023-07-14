@@ -23,6 +23,6 @@ router.post(
   TrackController.createTrack
 );
 
-router.get('/', TrackController.getAllTrack);
+router.get('/', auth(ENUM_USER_ROLE.USER), TrackController.getAllTrack);
 
 export default router;

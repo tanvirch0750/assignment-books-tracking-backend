@@ -14,6 +14,6 @@ router.post(
   ReviewController.createReview
 );
 
-router.get('/', ReviewController.getAllReview);
+router.get('/', auth(ENUM_USER_ROLE.USER), ReviewController.getAllReview);
 
 export default router;

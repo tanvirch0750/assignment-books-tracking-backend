@@ -5,7 +5,6 @@ import ApiError from '../../../errors/ApiError';
 import catchAsync from '../../../shared/catchAsync';
 import pick from '../../../shared/pick';
 import sendResponse from '../../../shared/sendResponse';
-import { wishlistFilterableFields } from './wishlist.constant';
 import { IWishlist } from './wishlist.interface';
 import { WishlistServices } from './wishlist.services';
 
@@ -24,11 +23,11 @@ const createWishlist: RequestHandler = catchAsync(async (req, res) => {
 });
 
 const getAllWishlist: RequestHandler = catchAsync(async (req, res, next) => {
-  const filters = pick(req.query, wishlistFilterableFields);
+  const id = req.user?.userId;
   const paginationOptions = pick(req.query, paginationFields);
 
   const result = await WishlistServices.getAllWishlistFromDB(
-    filters,
+    id,
     paginationOptions
   );
 

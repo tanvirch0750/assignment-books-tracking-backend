@@ -20,6 +20,6 @@ router.post(
   WishlistController.createWishlist
 );
 
-router.get('/', WishlistController.getAllWishlist);
+router.get('/', auth(ENUM_USER_ROLE.USER), WishlistController.getAllWishlist);
 
 export default router;

@@ -3,9 +3,7 @@ import ApiError from '../../../errors/ApiError';
 import { calculatePagination } from '../../../helpers/paginationHelper';
 import { IGenericPaginationResponse } from '../../../interfaces/genericPaginationResponse';
 import { IpaginationOptions } from '../../../interfaces/paginationOptions';
-import { findFilterConditions } from '../../../shared/findFilterConditions';
-import { wishlistSearchableFields } from './wishlist.constant';
-import { IWishlist, IWishlistFilters } from './wishlist.interface';
+import { IWishlist } from './wishlist.interface';
 import { Wishlist } from './wishlist.model';
 
 const createWishlistToDB = async (
@@ -44,22 +42,11 @@ const deleteWishlistFromDB = async (
 };
 
 const getAllWishlistFromDB = async (
-  filters: IWishlistFilters,
+  id: string,
   paginationOptions: IpaginationOptions
 ): Promise<IGenericPaginationResponse<IWishlist[]>> => {
-  const { searchTerm, ...filtersData } = filters;
-
-  const andConditions = findFilterConditions(
-    searchTerm,
-    filtersData,
-    wishlistSearchableFields
-  );
-
   const { page, limit, skip, sortBy, sortOrder } =
     calculatePagination(paginationOptions);
-
-  const whereConditions =
-    andConditions.length > 0 ? { $and: andConditions } : {};
 
   const sortConditions: { [key: string]: SortOrder } = {};
 
@@ -67,14 +54,14 @@ const getAllWishlistFromDB = async (
     sortConditions[sortBy] = sortOrder;
   }
 
-  const result = await Wishlist.find(whereConditions)
+  const result = await Wishlist.find({ user: id })
     .populate('book')
     .populate('user')
     .sort(sortConditions)
     .skip(skip)
     .limit(limit);
 
-  const total = await Wishlist.countDocuments(whereConditions);
+  const total = result.length;
 
   return {
     meta: {
