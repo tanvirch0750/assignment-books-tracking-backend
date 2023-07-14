@@ -7,6 +7,12 @@ import { createWishlistZodSchema } from './wishlist.validation';
 
 const router = express.Router();
 
+router.delete(
+  '/:id',
+  auth(ENUM_USER_ROLE.USER),
+  WishlistController.deleteWishlist
+);
+
 router.post(
   '/',
   validateRequest(createWishlistZodSchema),
@@ -15,11 +21,5 @@ router.post(
 );
 
 router.get('/', WishlistController.getAllWishlist);
-
-router.delete(
-  '/:id',
-  auth(ENUM_USER_ROLE.USER),
-  WishlistController.deleteWishlist
-);
 
 export default router;
