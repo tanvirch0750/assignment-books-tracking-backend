@@ -29,7 +29,7 @@ const bookSchema = new Schema<IBook, BookModel>(
       ref: 'User',
       required: true,
     },
-    descripttion: {
+    description: {
       type: String,
       default: 'Will be add soon',
     },

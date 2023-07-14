@@ -10,7 +10,7 @@ export type IBook = {
   publicationYear: string;
   image: string;
   addedBy: Types.ObjectId | IUser;
-  descripttion?: string;
+  description?: string;
   id?: string;
 };
 
