@@ -31,7 +31,7 @@ userSchema.statics.isUserExist = async function isUserExist(
 ): Promise<IUser | null> {
   const user = await User.findOne(
     { email },
-    { _id: 1, password: 1, role: 1, id: 1, email: 1 }
+    { _id: 1, password: 1, role: 1, id: 1, email: 1, userName: 1 }
   );
   return user;
 };
