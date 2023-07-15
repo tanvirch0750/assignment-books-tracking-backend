@@ -33,7 +33,7 @@ const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
     throw new ApiError('Password is incorrect', httpStatus.UNAUTHORIZED);
   } else {
     // create access token
-    const { id: userId, role, email } = isUserExist;
+    const { id: userId, role, email, userName } = isUserExist;
 
     const accessToken = jwtHelpers.createToken(
       { userId, role, email },
@@ -43,6 +43,9 @@ const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
 
     return {
       userId,
+      email,
+      userName,
+      role,
       accessToken,
     };
   }

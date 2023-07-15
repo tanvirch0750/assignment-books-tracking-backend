@@ -37,6 +37,9 @@ export type ILoginUser = {
 export type ILoginUserResponse = {
   userId?: string;
   accessToken: string;
+  email?: string;
+  userName?: string;
+  role?: string;
 };
 
 export type IVerifiedLoginUser = {
