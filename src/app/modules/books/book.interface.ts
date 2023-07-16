@@ -9,7 +9,7 @@ export type IBook = {
   genre: string;
   publicationYear: string;
   image: string;
-  addedBy: Types.ObjectId | IUser;
+  addedBy: Types.ObjectId | IUser | string;
   description?: string;
   id?: string;
 };

@@ -5,6 +5,7 @@ import ApiError from '../../errors/ApiError';
 import { handleBadValueError } from '../../errors/handleBadValueError';
 import { handleCastErrorDB } from '../../errors/handleCastErrorDB';
 import { handleDuplicateFieldsErrorDB } from '../../errors/handleDuplicateFieldsErrorDB';
+import { handleTokenError } from '../../errors/handleTokenError';
 import { handleValidationErrorDB } from '../../errors/handleValidationErroDB';
 import { handleZodError } from '../../errors/handleZodError';
 
@@ -52,8 +53,10 @@ const allErrors = (err: any) => {
   if (err?.name === 'ValidationError') {
     error = handleValidationErrorDB(error);
   }
+  if (err?.name === 'JsonWebTokenError') error = handleTokenError();
   if (config.env === 'production') {
     if (err?.code === 2) error = handleBadValueError();
+    if (err?.name === 'JsonWebTokenError') error = handleTokenError();
   }
 
   return error;

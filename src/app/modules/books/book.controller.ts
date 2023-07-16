@@ -10,8 +10,9 @@ import { IBook } from './book.interface';
 import { BookServices } from './book.services';
 
 const createBook: RequestHandler = catchAsync(async (req, res) => {
+  const userId = req.user?.userId;
   const book = req.body;
-  const result = await BookServices.createBookToDB(book);
+  const result = await BookServices.createBookToDB(userId, book);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

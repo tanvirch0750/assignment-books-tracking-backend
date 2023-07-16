@@ -8,7 +8,11 @@ import { bookSearchableFields } from './book.constant';
 import { IBook, IBookFilters } from './book.interface';
 import { Book } from './book.model';
 
-const createBookToDB = async (book: IBook): Promise<IBook> => {
+const createBookToDB = async (userId: string, book: IBook): Promise<IBook> => {
+  if (!userId) {
+    throw new ApiError(`You are not authorized`, 401);
+  }
+  book.addedBy = userId;
   const createBook = (await Book.create(book)).populate('addedBy');
   return createBook;
 };
